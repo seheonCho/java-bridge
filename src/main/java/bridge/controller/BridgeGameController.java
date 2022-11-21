@@ -1,7 +1,6 @@
 package bridge.controller;
 
 import bridge.domain.ClearStatus;
-import bridge.domain.ErrorStatus;
 import bridge.service.BridgeGame;
 import bridge.view.InputView;
 import bridge.view.OutputView;
@@ -34,6 +33,7 @@ public class BridgeGameController {
 
     private int getMakeBridgeSize() {
         String input = "";
+
         do {
             input = inputView.readBridgeSize();
         } while (!validateInputSetting(input));
@@ -41,18 +41,11 @@ public class BridgeGameController {
         return Integer.parseInt(input);
     }
 
-    private void printErrorStatus(ErrorStatus errorStatus) {
-        if (!errorStatus.isNotError()) {
-//            outputView.printErrorMessage(errorStatus);
-        }
-    }
-
     private void gameSetting(int bridgeSize) {
         bridgeGame.initBridge(bridgeSize);
     }
 
     private boolean validateInputSetting(String userInput) {
-
         try {
             bridgeGame.validateBridgeSize(userInput);
         } catch (IllegalArgumentException e) {
@@ -79,9 +72,7 @@ public class BridgeGameController {
         bridgeGame.initPlayer();
 
         do {
-            bridgeGame.initBridgeMap();
             bridgeGame.move(getMoveCommand());
-            bridgeGame.makeBridgeMap();
             outputView.printMap(bridgeGame.getBridgeMap());//이동 결과 출력
             outputView.printDivisionLine();
         } while (bridgeGame.moveAgain());
@@ -89,37 +80,43 @@ public class BridgeGameController {
     }
 
     private String getMoveCommand() {
-        ErrorStatus errorStatus = ErrorStatus.INVALID_INPUT;
         String input = EMPTY;
 
-        while (!errorStatus.isNotError()) {
+        do {
             input = inputView.readMoveCommand();
-            errorStatus = validateInputMoveCommand(input);
-            printErrorStatus(errorStatus);
-        }
+        } while (isDisallowInputMoveCommand(input));
 
         return input;
     }
 
-    private ErrorStatus validateInputMoveCommand(String input) {
-        return bridgeGame.validateInputMoveCommand(input);
+    private boolean isDisallowInputMoveCommand(String input) {
+        try {
+            bridgeGame.validateInputMoveCommand(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return true;
+        }
+        return false;
     }
 
     private String getReadGameCommand() {
-        ErrorStatus errorStatus = ErrorStatus.INVALID_INPUT;
         String input = EMPTY;
 
-        while (!errorStatus.isNotError()) {
+        do {
             input = inputView.readGameCommand();
-            errorStatus = validateInputGameCommand(input);
-            printErrorStatus(errorStatus);
-        }
+        } while (isDisallowInputGameCommand(input));
 
         return input;
     }
 
-    private ErrorStatus validateInputGameCommand(String input) {
-        return bridgeGame.validateInputGameCommand(input);
+    private boolean isDisallowInputGameCommand(String input) {
+        try {
+            bridgeGame.validateInputGameCommand(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return true;
+        }
+        return false;
     }
 
     /**

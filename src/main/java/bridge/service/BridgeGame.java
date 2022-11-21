@@ -39,21 +39,23 @@ public class BridgeGame {
         this.player = new Player();
     }
 
-    public void initBridgeMap() {
-        upperBridge = new ArrayList<>();
-        lowerBridge = new ArrayList<>();
-    }
-
     /**
      * 사용자가 칸을 이동할 때 사용하는 메서드
      * <p>
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public void move(String moveCommand) {
+        initBridgeMap();
         player.addChoice(moveCommand);
+        makeBridgeMap();
     }
 
-    public void makeBridgeMap() {
+    private void initBridgeMap() {
+        upperBridge = new ArrayList<>();
+        lowerBridge = new ArrayList<>();
+    }
+
+    private void makeBridgeMap() {
         for (int position = 0; position < player.getNumberOfChoice(); position++) {
             String choice = getChoiceByPosition(position);
             makeUpperBridgeOfPart(position, choice);
@@ -170,10 +172,8 @@ public class BridgeGame {
     }
 
     private void validateConvert(String input) {
-        int number = Integer.MIN_VALUE;
-
         try {
-            number = Integer.parseInt(input);
+            int number = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR]");
         }
@@ -185,18 +185,17 @@ public class BridgeGame {
         }
     }
 
-    public ErrorStatus validateInputMoveCommand(String command) {
+    public void validateInputMoveCommand(String command) {
         if (!isMoveCommand(command)) {
-            return ErrorStatus.INVALID_INPUT;
+            throw new IllegalArgumentException("[ERROR]");
         }
-        return ErrorStatus.NOT_ERROR;
     }
 
     private boolean isMoveCommand(String command) {
-        if (!UP.equals(command) && !DOWN.equals(command)) {
-            return false;
+        if (UP.equals(command) || DOWN.equals(command)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public ErrorStatus validateInputGameCommand(String input) {
