@@ -234,7 +234,7 @@ public class BridgeGame {
     }
 
     public void addTryCount() {
-        this.tryCount = tryCount + 1;
+        this.tryCount = tryCount + BINARY_UP;
     }
 
     public int getTryCount() {
