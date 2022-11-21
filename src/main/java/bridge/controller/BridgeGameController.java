@@ -7,13 +7,11 @@ import bridge.view.OutputView;
 
 import java.util.List;
 
-import static bridge.util.BridgeUtil.*;
-
 public class BridgeGameController {
 
-    private InputView inputView;
-    private OutputView outputView = new OutputView();
-    private BridgeGame bridgeGame;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final BridgeGame bridgeGame;
 
     public BridgeGameController() {
         this.inputView = new InputView();
@@ -32,7 +30,7 @@ public class BridgeGameController {
     }
 
     private int getMakeBridgeSize() {
-        String input = "";
+        String input;
 
         do {
             input = inputView.readBridgeSize();
@@ -62,7 +60,6 @@ public class BridgeGameController {
             if (bridgeGame.isClearGame()) {
                 break;
             }
-
         } while (bridgeGame.isRestartGame(getReadGameCommand()));
 
         getFinalResult();
@@ -76,12 +73,10 @@ public class BridgeGameController {
             outputView.printMap(bridgeGame.getBridgeMap());
             outputView.printDivisionLine();
         } while (bridgeGame.moveAgain());
-
     }
 
     private String getMoveCommand() {
-        String input = EMPTY;
-
+        String input;
         do {
             input = inputView.readMoveCommand();
         } while (isDisallowInputMoveCommand(input));
@@ -100,8 +95,7 @@ public class BridgeGameController {
     }
 
     private String getReadGameCommand() {
-        String input = EMPTY;
-
+        String input;
         do {
             input = inputView.readGameCommand();
         } while (isDisallowInputGameCommand(input));
