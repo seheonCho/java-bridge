@@ -9,6 +9,8 @@ import bridge.domain.bridgeTool.BridgeRandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bridge.message.ValidateMessage.INVALID_INPUT;
+import static bridge.message.ValidateMessage.OUT_OF_RANGE;
 import static bridge.util.BridgeUtil.*;
 import static bridge.util.GameCommand.QUIT;
 import static bridge.util.GameCommand.RESTART;
@@ -168,9 +170,9 @@ public class BridgeGame {
             int number = Integer.parseInt(input);
             validateBridgeSizeRange(number);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("[ERROR]");
+            throw new NumberFormatException(INVALID_INPUT);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(OUT_OF_RANGE);
         }
 
         return true;
@@ -178,21 +180,21 @@ public class BridgeGame {
 
     private void validateConvert(String input) {
         try {
-            int number = Integer.parseInt(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(INVALID_INPUT);
         }
     }
 
     private void validateBridgeSizeRange(int number) {
         if (MIN_BRIDGE_SIZE > number || MAX_BRIDGE_SIZE < number) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(OUT_OF_RANGE);
         }
     }
 
     public void validateInputMoveCommand(String command) {
         if (!isMoveCommand(command)) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(OUT_OF_RANGE);
         }
     }
 
@@ -205,7 +207,7 @@ public class BridgeGame {
 
     public void validateInputGameCommand(String input) {
         if (!isEndCommand(input) && !isRestartCommand(input)) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(OUT_OF_RANGE);
         }
     }
 
