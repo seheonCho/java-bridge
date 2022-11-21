@@ -1,11 +1,11 @@
 package bridge.view;
 
-import bridge.domain.ErrorStatus;
-
 import java.util.List;
 import java.util.StringJoiner;
 
-import static bridge.util.Constant.*;
+import static bridge.util.View.DELIMITER;
+import static bridge.util.View.VIEW_PREFIX;
+import static bridge.util.View.VIEW_SUFFIX;
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.

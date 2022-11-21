@@ -7,7 +7,7 @@ import bridge.view.OutputView;
 
 import java.util.List;
 
-import static bridge.util.Constant.*;
+import static bridge.util.BridgeUtil.*;
 
 public class BridgeGameController {
 
@@ -73,7 +73,7 @@ public class BridgeGameController {
 
         do {
             bridgeGame.move(getMoveCommand());
-            outputView.printMap(bridgeGame.getBridgeMap());//이동 결과 출력
+            outputView.printMap(bridgeGame.getBridgeMap());
             outputView.printDivisionLine();
         } while (bridgeGame.moveAgain());
 

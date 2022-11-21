@@ -1,7 +1,5 @@
 package bridge.domain;
 
-import bridge.util.Constant;
-
 import java.util.List;
 
 public class Bridge {
@@ -18,10 +16,6 @@ public class Bridge {
 
     public String getBridgeByIndex(int index) {
         return bridge.get(index);
-    }
-
-    public String getLastOfBridge() {
-        return bridge.get(getBridgeLength() - Constant.GAP_IN_POSITION_AND_SIZE);
     }
 
 }

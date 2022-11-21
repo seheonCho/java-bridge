@@ -1,6 +1,6 @@
 package bridge.domain;
 
-import bridge.util.Constant;
+import bridge.util.BridgeUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class PlayerTest {
     @Test
     void addChoice() {
         Player player = new Player();
-        player.addChoice(Constant.UP);
+        player.addChoice(BridgeUtil.UP);
 
         assertThat(player.getNumberOfChoice()).isEqualTo(1);
     }
@@ -21,20 +21,20 @@ class PlayerTest {
     @Test
     void getChoiceByPosition() {
         Player player = new Player();
-        player.addChoice(Constant.UP);
-        player.addChoice(Constant.DOWN);
-        player.addChoice(Constant.UP);
+        player.addChoice(BridgeUtil.UP);
+        player.addChoice(BridgeUtil.DOWN);
+        player.addChoice(BridgeUtil.UP);
 
-        assertThat(player.getChoiceIndex(1)).isEqualTo(Constant.DOWN);
+        assertThat(player.getChoiceIndex(1)).isEqualTo(BridgeUtil.DOWN);
     }
 
     @DisplayName("Player 클래스의, choice 개수를 가져온다.")
     @Test
     void getNumberOfChoice() {
         Player player = new Player();
-        player.addChoice(Constant.UP);
-        player.addChoice(Constant.DOWN);
-        player.addChoice(Constant.UP);
+        player.addChoice(BridgeUtil.UP);
+        player.addChoice(BridgeUtil.DOWN);
+        player.addChoice(BridgeUtil.UP);
 
         assertThat(player.getNumberOfChoice()).isEqualTo(3);
     }
@@ -43,11 +43,11 @@ class PlayerTest {
     @Test
     void getLastChoice() {
         Player player = new Player();
-        player.addChoice(Constant.UP);
-        player.addChoice(Constant.DOWN);
-        player.addChoice(Constant.UP);
+        player.addChoice(BridgeUtil.UP);
+        player.addChoice(BridgeUtil.DOWN);
+        player.addChoice(BridgeUtil.UP);
 
-        assertThat(player.getLastChoice()).isEqualTo(Constant.UP);
+        assertThat(player.getLastChoice()).isEqualTo(BridgeUtil.UP);
     }
 
 }

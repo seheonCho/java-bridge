@@ -3,6 +3,8 @@ package bridge.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bridge.util.BridgeUtil.GAP_IN_INDEX_AND_SIZE;
+
 public class Player {
 
     private final List<String> choice;
@@ -24,7 +26,7 @@ public class Player {
     }
 
     public String getLastChoice() {
-        return choice.get(getNumberOfChoice() - 1);
+        return choice.get(getNumberOfChoice() - GAP_IN_INDEX_AND_SIZE);
     }
 
 }

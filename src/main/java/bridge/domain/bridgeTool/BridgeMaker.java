@@ -1,6 +1,6 @@
 package bridge.domain.bridgeTool;
 
-import bridge.util.Constant;
+import bridge.util.BridgeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +30,12 @@ public class BridgeMaker {
         for (int position = 0; position < size; position++) {
             int binary = bridgeNumberGenerator.generate();
 
-            if (binary == Constant.BINARY_UP) {
-                bridge.add(Constant.UP);
+            if (binary == BridgeUtil.BINARY_UP) {
+                bridge.add(BridgeUtil.UP);
                 continue;
             }
 
-            bridge.add(Constant.DOWN);
+            bridge.add(BridgeUtil.DOWN);
         }
     }
 }

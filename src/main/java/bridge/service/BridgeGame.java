@@ -1,7 +1,6 @@
 package bridge.service;
 
 import bridge.domain.Bridge;
-import bridge.domain.ErrorStatus;
 import bridge.domain.Player;
 import bridge.domain.bridgeTool.BridgeMaker;
 import bridge.domain.bridgeTool.BridgeNumberGenerator;
@@ -10,7 +9,15 @@ import bridge.domain.bridgeTool.BridgeRandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bridge.util.Constant.*;
+import static bridge.util.BridgeUtil.UP;
+import static bridge.util.BridgeUtil.SPACE;
+import static bridge.util.BridgeUtil.ANSWER_RESULT;
+import static bridge.util.BridgeUtil.WRONG_ANSWER_RESULT;
+import static bridge.util.BridgeUtil.DOWN;
+import static bridge.util.BridgeUtil.MIN_BRIDGE_SIZE;
+import static bridge.util.BridgeUtil.MAX_BRIDGE_SIZE;
+import static bridge.util.GameCommand.QUIT;
+import static bridge.util.GameCommand.RESTART;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -198,11 +205,10 @@ public class BridgeGame {
         return false;
     }
 
-    public ErrorStatus validateInputGameCommand(String input) {
-        if (isEndCommand(input) || isRestartCommand(input)) {
-            return ErrorStatus.NOT_ERROR;
+    public void validateInputGameCommand(String input) {
+        if (!isEndCommand(input) && !isRestartCommand(input)) {
+            throw new IllegalArgumentException("[ERROR]");
         }
-        return ErrorStatus.INVALID_INPUT;
     }
 
     public boolean isEndCommand(String command) {
