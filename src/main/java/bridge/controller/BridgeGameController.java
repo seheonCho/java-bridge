@@ -39,10 +39,6 @@ public class BridgeGameController {
         return Integer.parseInt(input);
     }
 
-    private void gameSetting(int bridgeSize) {
-        bridgeGame.initBridge(bridgeSize);
-    }
-
     private boolean validateInputSetting(String userInput) {
         try {
             bridgeGame.validateBridgeSize(userInput);
@@ -52,6 +48,10 @@ public class BridgeGameController {
         }
 
         return true;
+    }
+
+    private void gameSetting(int bridgeSize) {
+        bridgeGame.initBridge(bridgeSize);
     }
 
     private void gamePlay() {
