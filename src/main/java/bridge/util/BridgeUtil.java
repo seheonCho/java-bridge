@@ -14,8 +14,6 @@ public final class BridgeUtil {
     public static final String ANSWER_RESULT = "O";
     public static final String WRONG_ANSWER_RESULT = "X";
 
-    public static final String EMPTY = "";
-
     private BridgeUtil() {}
 
 }

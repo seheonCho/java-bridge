@@ -9,13 +9,7 @@ import bridge.domain.bridgeTool.BridgeRandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bridge.util.BridgeUtil.UP;
-import static bridge.util.BridgeUtil.SPACE;
-import static bridge.util.BridgeUtil.ANSWER_RESULT;
-import static bridge.util.BridgeUtil.WRONG_ANSWER_RESULT;
-import static bridge.util.BridgeUtil.DOWN;
-import static bridge.util.BridgeUtil.MIN_BRIDGE_SIZE;
-import static bridge.util.BridgeUtil.MAX_BRIDGE_SIZE;
+import static bridge.util.BridgeUtil.*;
 import static bridge.util.GameCommand.QUIT;
 import static bridge.util.GameCommand.RESTART;
 
@@ -28,7 +22,7 @@ public class BridgeGame {
     private Player player;
     private List<String> upperBridge = new ArrayList<>();
     private List<String> lowerBridge = new ArrayList<>();
-    private int tryCount = 1;
+    private int tryCount = initTryCount();
     private boolean crossAllBridge;
 
     private BridgeNumberGenerator bridgeNumberGenerator = new BridgeRandomNumberGenerator();
@@ -36,6 +30,10 @@ public class BridgeGame {
 
     public BridgeGame() {
         bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
+    }
+
+    private int initTryCount() {
+        return BINARY_UP;
     }
 
     public void initBridge(int bridgeSize) {
