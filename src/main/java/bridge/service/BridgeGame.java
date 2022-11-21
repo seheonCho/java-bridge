@@ -171,17 +171,14 @@ public class BridgeGame {
     }
 
     public boolean validateBridgeSize(String input) {
-
         try {
             validateConvert(input);
-            int number = Integer.parseInt(input);
-            validateBridgeSizeRange(number);
+            validateBridgeSizeRange(Integer.parseInt(input));
         } catch (NumberFormatException e) {
             throw new NumberFormatException(INVALID_INPUT);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(OUT_OF_RANGE);
         }
-
         return true;
     }
 
