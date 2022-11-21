@@ -38,8 +38,8 @@ public class OutputView {
         return new StringJoiner(DELIMITER, VIEW_PREFIX, VIEW_SUFFIX);
     }
 
-    public void printErrorMessage(ErrorStatus message) {
-        System.out.println(message.getMessage());
+    public void printErrorMessage(String message) {
+        System.out.println(message);
     }
 
     /**

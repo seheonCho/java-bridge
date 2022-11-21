@@ -33,21 +33,17 @@ public class BridgeGameController {
     }
 
     private int getMakeBridgeSize() {
-        ErrorStatus errorStatus = ErrorStatus.INVALID_INPUT;
-        String input = EMPTY;
-
-        while (!errorStatus.isNotError()) {
+        String input = "";
+        do {
             input = inputView.readBridgeSize();
-            errorStatus = validateInputSetting(input);
-            printErrorStatus(errorStatus);
-        }
+        } while (!validateInputSetting(input));
 
         return Integer.parseInt(input);
     }
 
     private void printErrorStatus(ErrorStatus errorStatus) {
         if (!errorStatus.isNotError()) {
-            outputView.printErrorMessage(errorStatus);
+//            outputView.printErrorMessage(errorStatus);
         }
     }
 
@@ -55,8 +51,16 @@ public class BridgeGameController {
         bridgeGame.initBridge(bridgeSize);
     }
 
-    private ErrorStatus validateInputSetting(String userInput) {
-        return bridgeGame.validateBridgeSize(userInput);
+    private boolean validateInputSetting(String userInput) {
+
+        try {
+            bridgeGame.validateBridgeSize(userInput);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     private void gamePlay() {

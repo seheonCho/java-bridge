@@ -154,29 +154,35 @@ public class BridgeGame {
         crossAllBridge = true;
     }
 
-    public ErrorStatus validateBridgeSize(String input) {
-        int number = Integer.MIN_VALUE;
+    public boolean validateBridgeSize(String input) {
+
         try {
-            number = validateConvert(input);
+            validateConvert(input);
+            int number = Integer.parseInt(input);
+            validateBridgeSizeRange(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR]");
         } catch (IllegalArgumentException e) {
-            return ErrorStatus.INVALID_INPUT;
+            throw new IllegalArgumentException("[ERROR]");
         }
-        if (MIN_BRIDGE_SIZE > number || MAX_BRIDGE_SIZE < number) {
-            return ErrorStatus.OUT_OF_RANGE;
-        }
-        return ErrorStatus.NOT_ERROR;
+
+        return true;
     }
 
-    private int validateConvert(String input) {
+    private void validateConvert(String input) {
         int number = Integer.MIN_VALUE;
 
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR]");
         }
+    }
 
-        return number;
+    private void validateBridgeSizeRange(int number) {
+        if (MIN_BRIDGE_SIZE > number || MAX_BRIDGE_SIZE < number) {
+            throw new IllegalArgumentException("[ERROR]");
+        }
     }
 
     public ErrorStatus validateInputMoveCommand(String command) {
